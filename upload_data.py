@@ -9,8 +9,8 @@ uri = "mongodb+srv://rishabh:JSZ903tgcckHBghJ@cluster0.tjg74.mongodb.net/?retryW
 client = MongoClient(uri)
 
 # create database and collection name
-DATABASE_NAME="pwskills"
-COLLECTION_NAME="waferfault"
+DATABASE_NAME = "pwskills"
+COLLECTION_NAME = "waferfault"
 
 df = pd.read_csv("./notebooks/wafer_23012020_041211.csv")
 
