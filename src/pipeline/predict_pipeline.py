@@ -71,7 +71,7 @@ class PredictionPipeline:
             input_dataframe: pd.DataFrame = pd.read_csv(input_dataframe_path)
 
             input_dataframe = input_dataframe.drop(
-                columns="Unnamed:0") if "Unnamed: 0" in input_dataframe.columns else input_dataframe
+                columns="Unnamed: 0") if "Unnamed: 0" in input_dataframe.columns else input_dataframe
 
             predictions = self.predict(input_dataframe)
 
