@@ -17,7 +17,7 @@ class TrainingPipeline:
             return feature_store_file_path
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
 
     def start_data_transformation(self, feature_store_file_path):
         try:
@@ -27,7 +27,7 @@ class TrainingPipeline:
             return train_arr, test_arr, preprocessor_path
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
 
     def start_model_training(self, train_arr, test_arr):
         try:
@@ -37,7 +37,7 @@ class TrainingPipeline:
             )
             return model_store
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
 
     def run_pipeline(self):
         try:
@@ -50,4 +50,4 @@ class TrainingPipeline:
             print(f"Training completed, Trained model score: ", r2_square)
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)

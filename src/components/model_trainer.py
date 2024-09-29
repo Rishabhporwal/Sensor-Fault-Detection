@@ -63,7 +63,7 @@ class ModelTrainer:
             return report
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
 
     def get_best_model(self, x_train: np.array, y_train: np.array, x_test: np.array, y_test: np.array):
 
@@ -86,7 +86,7 @@ class ModelTrainer:
             return best_model_name, best_model_object, best_model_score
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
 
     def finetune_best_model(self, best_model_object: object, best_model_name, X_train, y_train) -> object:
         try:
@@ -108,7 +108,7 @@ class ModelTrainer:
 
             return finetuned_model
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
 
     def initiate_model_trainer(self, train_array, test_array):
 
@@ -175,4 +175,4 @@ class ModelTrainer:
             return self.model_trainer_config.trained_model_path
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)

@@ -44,7 +44,7 @@ class PredictionPipeline:
             return pred_file_path
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
 
     def predict(self, features):
 
@@ -61,7 +61,7 @@ class PredictionPipeline:
             return preds
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
 
     def get_predicted_dataframe(self, input_dataframe_path: pd.DataFrame):
 
@@ -93,7 +93,7 @@ class PredictionPipeline:
             logging.info("Prediction Completed")
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
 
     def run_pipeline(self):
         try:
@@ -104,4 +104,4 @@ class PredictionPipeline:
             return self.prediction_pipeline_config
 
         except Exception as e:
-            raise CustomException(sys, e)
+            raise CustomException(e, sys)
