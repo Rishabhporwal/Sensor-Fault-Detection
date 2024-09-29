@@ -6,7 +6,7 @@ import pickle
 
 from src.logger import logging
 from src.exception import CustomException
-from flask import requests
+from flask import request
 from src.constant import *
 from src.utils.main_utils import MainUtils
 from dataclasses import dataclass
@@ -23,7 +23,7 @@ class PredictionPipelineConfig:
 
 
 class PredictionPipeline:
-    def __init__(self, request: requests):
+    def __init__(self, request: request):
 
         self.request = request
         self.utils = MainUtils()
