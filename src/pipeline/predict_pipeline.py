@@ -3,7 +3,6 @@ import os
 import sys
 import pandas as pd
 import pickle
-
 from src.logger import logging
 from src.exception import CustomException
 from flask import request
@@ -18,7 +17,7 @@ class PredictionPipelineConfig:
     prediction_file_name: str = "prediction_file.csv"
     model_file_path: str = os.path.join(artifact_folder, 'model.pkl')
     preprocessor_path: str = os.path.join(artifact_folder, 'preprocessor.pkl')
-    prediction_file_path = os.path.join(
+    prediction_file_path: str = os.path.join(
         prediction_output_dirname, prediction_file_name)
 
 
@@ -30,7 +29,6 @@ class PredictionPipeline:
         self.prediction_pipeline_config = PredictionPipelineConfig()
 
     def save_input_files(self) -> str:
-
         try:
             pred_file_input_dir = "prediction_artifacts"
             os.makedirs(pred_file_input_dir, exist_ok=True)
@@ -42,7 +40,6 @@ class PredictionPipeline:
             input_csv_file.save(pred_file_path)
 
             return pred_file_path
-
         except Exception as e:
             raise CustomException(e, sys)
 
@@ -54,12 +51,12 @@ class PredictionPipeline:
                 self.prediction_pipeline_config.model_file_path)
             preprocessor = self.utils.load_object(
                 file_path=self.prediction_pipeline_config.preprocessor_path)
+
             transformed_x = preprocessor.transform(features)
 
             preds = model.predict(transformed_x)
 
             return preds
-
         except Exception as e:
             raise CustomException(e, sys)
 
@@ -81,8 +78,7 @@ class PredictionPipeline:
             target_column_mapping = {0: 'bad', 1: 'good'}
 
             input_dataframe[prediction_column_name] = input_dataframe[prediction_column_name].map(
-                target_column_mapping
-            )
+                target_column_mapping)
 
             os.makedirs(
                 self.prediction_pipeline_config.prediction_output_dirname, exist_ok=True)
@@ -93,15 +89,13 @@ class PredictionPipeline:
             logging.info("Prediction Completed")
 
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
     def run_pipeline(self):
         try:
-
             input_csv_path = self.save_input_files()
             self.get_predicted_dataframe(input_csv_path)
 
             return self.prediction_pipeline_config
-
         except Exception as e:
             raise CustomException(e, sys)
